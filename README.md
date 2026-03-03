@@ -200,9 +200,12 @@ Mustafa Alhayek
 
 ## Submission
 
-Students who take the Computational Materials Science course in Spring 2026, please submit the following to Canvas for the project:
+Students who take the Computational Materials Science course in Spring 2026, please submit the following to Canvas for each alloy:
 
-- 
+- Both `lmp_mcnpt.in` and `lmp_gsfe.in` files
+- The `data.CSRO` file
+- All 20 `gsfe` files
+- All 20 USFE values and the mean USFE value
 
 ## Reference
 
