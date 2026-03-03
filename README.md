@@ -19,7 +19,7 @@ Note: Pay attention to the amount of data in our \$HOME. They can build up quick
 
 LAMMPS on [OSCER](http://www.ou.edu/oscer.html) likely does not come with many packages. To finish this project, the [MLIP](https://mlip.skoltech.ru) package is needed.
 
-To install LAMMPS with MLIP, use the file `lmp_mlip.sh` in the `MTP/` directory in this GitHub repository. First, cd to any directory on OSCER, e.g., \$HOME, then
+To install LAMMPS with MLIP, use the file `lmp_mlip.sh` in this GitHub repository. First, cd to your \$HOME on OSCER, then
 
 	el9
 	sh lmp_mlip.sh
@@ -34,7 +34,7 @@ Note that we need to exit the el9 container by `exit` before running any LAMMPS 
 
 ### Mo<sub>0.1</sub>Nb<sub>0.9</sub>
 
-Run a LAMMPS simulation with files `lmp_mcnpt.in`, `lmp.batch`, `fitted.mtp`, and `mlip.ini`. The first file can be found in the `csro/` directory in this GitHub repository. The second file can be found in this GitHub repository. The other two files, retrieved from [another GitHub repository](https://github.com/ucsdlxg/MoNbTaVW-ML-interatomic-potential-and-CRSS-ML-model), can be found in the `MTP/` directory in this GitHub repository. Make sure the correct input file name and parition are used in `lmp.batch`, and submit the job by
+Run a LAMMPS simulation with files `lmp_mcnpt.in`, `lmp.batch`, `fitted.mtp`, and `mlip.ini`. The first file can be found in the `csro/` directory in this GitHub repository. The second file can be found in this GitHub repository. The other two files can be found in the `potential/` directory in [another GitHub repository](https://github.com/ucsdlxg/MoNbTaVW-ML-interatomic-potential-and-CRSS-ML-model). Make sure the correct input file name and partition are used in `lmp.batch`, and submit the job by
 
 	sbatch lmp.batch
 
