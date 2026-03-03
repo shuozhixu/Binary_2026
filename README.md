@@ -34,11 +34,11 @@ Note that we need to exit the el9 container by `exit` before running any LAMMPS 
 
 ### Mo<sub>0.1</sub>Nb<sub>0.9</sub>
 
-Run a LAMMPS simulation with files `lmp_mcnpt.in`, `lmp.batch`, `fitted.mtp`, and `mlip.ini`. The first file can be found in the `csro/` directory in this GitHub repository. The second file can be found in this GitHub repository. The other two files, retrieved from [another GitHub repository](https://github.com/ucsdlxg/MoNbTaVW-ML-interatomic-potential-and-CRSS-ML-model), can be found in the `MTP/` directory in this GitHub repository. Make sure the correct input file name is used in `lmp.batch`, and submit the job by
+Run a LAMMPS simulation with files `lmp_mcnpt.in`, `lmp.batch`, `fitted.mtp`, and `mlip.ini`. The first file can be found in the `csro/` directory in this GitHub repository. The second file can be found in this GitHub repository. The other two files, retrieved from [another GitHub repository](https://github.com/ucsdlxg/MoNbTaVW-ML-interatomic-potential-and-CRSS-ML-model), can be found in the `MTP/` directory in this GitHub repository. Make sure the correct input file name and parition are used in `lmp.batch`, and submit the job by
 
 	sbatch lmp.batch
 
-Once it is finished, we will find a new data file `data.GSFE` which will be used later.
+The job should be finished in 20 to 24 hours. Once it is finished, we will find a new data file `data.GSFE` which will be used later.
 
 ### Mo<sub>0.2</sub>Nb<sub>0.8</sub> to Mo<sub>0.9</sub>Nb<sub>0.1</sub>
 
@@ -75,7 +75,7 @@ where _x_ is the atomic percentage of Mo atoms.
 
 ### Other binary alloys
 
-The same logic can be applied to all other binary alloys. For example, for V<sub>0.3</sub>W<sub>0.7</sub>, those three lines should be
+Changes should be made to the input file for all other binary alloys. For example, for V<sub>0.3</sub>W<sub>0.7</sub>, those three lines should be
 
 	create_atoms 5 box
 	set type 5 type/ratio 3 0.3 384
@@ -86,13 +86,13 @@ The same logic can be applied to all other binary alloys. For example, for V<sub
 ### Plane 1
 
 The simulation requires files 
-`lmp_gsfe.in`, `data.CSRO` `lmp.batch`, `fitted.mtp`, and `mlip.ini`. The first file can be found in the `gsfe/` directory in this GitHub repository. The second file is the exact data file generated previously for a given alloy.
+`lmp_gsfe.in`, `data.CSRO` `lmp.batch`, `fitted.mtp`, and `mlip.ini`. The first file can be found in the `gsfe/` directory in this GitHub repository. The second file is the data file generated from the previous simulation for a given alloy.
 
 Modify `lmp_gsfe.in`:
 
 - line 16, replace the number `3.3` with the corresponding lattice parameter
 
-Then run the simulation. Once it is finished, we will find a new file `gsfe_ori`. Run
+Then run the simulation, which should be finished in less than one minute. Once it is finished, we will find a new file `gsfe_ori`. Run
 
 	sh gsfe_curve.sh
 
@@ -114,13 +114,95 @@ Increase the integer in line 54 of `lmp_gsfe.in` from 3 to 20 to obtain 20 USFE 
 
 <!--A huge thank you to the first 20 contributors who ran simulations for the final project in Dr. Shuozhi Xu's [Computational Materials Science course in Spring 2026](https://shuozhixu.github.io/teaching/spring-2026/AME4970-5970-Syllabus.pdf) at the University of Oklahoma!-->
 
-xxxx
+1
 
 - Mo<sub>0.1</sub>Nb<sub>0.9</sub>, Mo<sub>0.2</sub>Nb<sub>0.8</sub>, Mo<sub>0.3</sub>Nb<sub>0.7</sub>, Mo<sub>0.4</sub>Nb<sub>0.6</sub>
+
+2
+
+- Mo<sub>0.6</sub>Nb<sub>0.4</sub>, Mo<sub>0.7</sub>Nb<sub>0.3</sub>, Mo<sub>0.8</sub>Nb<sub>0.2</sub>, Mo<sub>0.9</sub>Nb<sub>0.1</sub>
+
+3
+
+- Mo<sub>0.1</sub>Ta<sub>0.9</sub>, Mo<sub>0.2</sub>Ta<sub>0.8</sub>, Mo<sub>0.3</sub>Ta<sub>0.7</sub>, Mo<sub>0.4</sub>Ta<sub>0.6</sub>
+
+4
+
+- Mo<sub>0.6</sub>Ta<sub>0.4</sub>, Mo<sub>0.7</sub>Ta<sub>0.3</sub>, Mo<sub>0.8</sub>Ta<sub>0.2</sub>, Mo<sub>0.9</sub>Ta<sub>0.1</sub>
+
+5
+
+- Mo<sub>0.1</sub>V<sub>0.9</sub>, Mo<sub>0.2</sub>V<sub>0.8</sub>, Mo<sub>0.3</sub>V<sub>0.7</sub>, Mo<sub>0.4</sub>V<sub>0.6</sub>
+
+6
+
+- Mo<sub>0.6</sub>V<sub>0.4</sub>, Mo<sub>0.7</sub>V<sub>0.3</sub>, Mo<sub>0.8</sub>V<sub>0.2</sub>, Mo<sub>0.9</sub>V<sub>0.1</sub>
+
+7
+
+- Mo<sub>0.1</sub>W<sub>0.9</sub>, Mo<sub>0.2</sub>W<sub>0.8</sub>, Mo<sub>0.3</sub>W<sub>0.7</sub>, Mo<sub>0.4</sub>W<sub>0.6</sub>
+
+8
+
+- Mo<sub>0.6</sub>W<sub>0.4</sub>, Mo<sub>0.7</sub>W<sub>0.3</sub>, Mo<sub>0.8</sub>W<sub>0.2</sub>, Mo<sub>0.9</sub>W<sub>0.1</sub>
+
+9
+
+- Nb<sub>0.1</sub>Ta<sub>0.9</sub>, Nb<sub>0.2</sub>Ta<sub>0.8</sub>, Nb<sub>0.3</sub>Ta<sub>0.7</sub>, Nb<sub>0.4</sub>Ta<sub>0.6</sub>
+
+10
+
+- Nb<sub>0.6</sub>Ta<sub>0.4</sub>, Nb<sub>0.7</sub>Ta<sub>0.3</sub>, Nb<sub>0.8</sub>Ta<sub>0.2</sub>, Nb<sub>0.9</sub>Ta<sub>0.1</sub>
+
+11
+
+- Nb<sub>0.1</sub>V<sub>0.9</sub>, Nb<sub>0.2</sub>V<sub>0.8</sub>, Nb<sub>0.3</sub>V<sub>0.7</sub>, Nb<sub>0.4</sub>V<sub>0.6</sub>
+
+12
+
+- Nb<sub>0.6</sub>V<sub>0.4</sub>, Nb<sub>0.7</sub>V<sub>0.3</sub>, Nb<sub>0.8</sub>V<sub>0.2</sub>, Nb<sub>0.9</sub>V<sub>0.1</sub>
+
+13
+
+- Nb<sub>0.1</sub>W<sub>0.9</sub>, Nb<sub>0.2</sub>W<sub>0.8</sub>, Nb<sub>0.3</sub>W<sub>0.7</sub>, Nb<sub>0.4</sub>W<sub>0.6</sub>
+
+14
+
+- Nb<sub>0.6</sub>W<sub>0.4</sub>, Nb<sub>0.7</sub>W<sub>0.3</sub>, Nb<sub>0.8</sub>W<sub>0.2</sub>, Nb<sub>0.9</sub>W<sub>0.1</sub>
+
+15
+
+- Ta<sub>0.1</sub>V<sub>0.9</sub>, Ta<sub>0.2</sub>V<sub>0.8</sub>, Ta<sub>0.3</sub>V<sub>0.7</sub>, Ta<sub>0.4</sub>V<sub>0.6</sub>
+
+16
+
+- Ta<sub>0.6</sub>V<sub>0.4</sub>, Ta<sub>0.7</sub>V<sub>0.3</sub>, Ta<sub>0.8</sub>V<sub>0.2</sub>, Ta<sub>0.9</sub>V<sub>0.1</sub>
+
+17
+
+- Ta<sub>0.1</sub>W<sub>0.9</sub>, Ta<sub>0.2</sub>W<sub>0.8</sub>, Ta<sub>0.3</sub>W<sub>0.7</sub>, Ta<sub>0.4</sub>W<sub>0.6</sub>
+
+18
+
+- Ta<sub>0.6</sub>W<sub>0.4</sub>, Ta<sub>0.7</sub>W<sub>0.3</sub>, Ta<sub>0.8</sub>W<sub>0.2</sub>, Ta<sub>0.9</sub>W<sub>0.1</sub>
+
+19
+
+- V<sub>0.1</sub>W<sub>0.9</sub>, V<sub>0.2</sub>W<sub>0.8</sub>, V<sub>0.3</sub>W<sub>0.7</sub>, V<sub>0.4</sub>W<sub>0.6</sub>
+
+20
+
+- V<sub>0.6</sub>W<sub>0.4</sub>, V<sub>0.7</sub>W<sub>0.3</sub>, V<sub>0.8</sub>W<sub>0.2</sub>, V<sub>0.9</sub>W<sub>0.1</sub>
 
 Mustafa Alhayek
 
 - Mo<sub>0.5</sub>Nb<sub>0.5</sub>, Mo<sub>0.5</sub>Ta<sub>0.5</sub>, Mo<sub>0.5</sub>V<sub>0.5</sub>, Mo<sub>0.5</sub>W<sub>0.5</sub>, Nb<sub>0.5</sub>Ta<sub>0.5</sub>, Nb<sub>0.5</sub>V<sub>0.5</sub>, Nb<sub>0.5</sub>W<sub>0.5</sub>, Ta<sub>0.5</sub>V<sub>0.5</sub>, Ta<sub>0.5</sub>W<sub>0.5</sub>, V<sub>0.5</sub>W<sub>0.5</sub>
+
+## Submission
+
+Students who take the Computational Materials Science course in Spring 2026, please submit the following to Canvas for the project:
+
+- 
 
 ## Reference
 

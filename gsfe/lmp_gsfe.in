@@ -52,7 +52,7 @@ group		boundary union lobound upbound
 group		mobile subtract all boundary
 
 variable        d equal 1
-variable        mid equal ${zmid}+${latparam}/sqrt(2.)*(${d}-10.5)
+variable        mid equal ${zmid}+${latparam}/sqrt(2.)*(${d}-10)
 
 region		upper block INF INF INF INF ${mid} INF units box      #variable
 region		lower block INF INF INF INF INF ${mid} units box      #variable
