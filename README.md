@@ -1,19 +1,17 @@
-# Refractory non-dilute random alloys: Lattice parameters and unstable stacking fault energies
+# Random binary alloys: generalized stacking fault energies
 
 ## Foreword
 
-The purpose of this project is to calculate the unstable stacking fault energies (USFEs) of 5 pure metals, 990 binaries, 10 ternaries, 5 quaternaries, and 1 quinary. USFE is the peak value of the generalized stacking fault energy (GSFE) curve.
+The purpose of this project is to calculate the generalized stacking fault energies (GSFEs) of 90 binaries. The peak value of the GSFE curve is called the unstable stacking fault energy (USFE).
 
-All materials have a body-centered cubic (BCC) lattice. For each pure metal, we need to run 1 LAMMPS simulation. For each alloy, we need to run 20 LAMMPS simulations. Therefore, in total 20,125 LAMMPS simulations are needed. Then we will train a machine learning model to predict these energies from chemical compositions. It would also be interesting to check how the USFE gradually varies with the composition in each set of binaries.
+All alloys have a body-centered cubic (BCC) lattice. For each alloy, we need to run 1 LAMMPS simulations to generate the chemical short-range order (CSRO) structure and 20 LAMMPS simulations to obtain the mean GSFE curve. Therefore, in total 1,890 LAMMPS simulations are needed. The GSFE curves of the random structures of these binaries were presented in [our previous paper](https://doi.org/10.1007/s11837-025-07728-x).
 
-The 10 ternaries, 5 quaternaries, and 1 quinary are listed in Table 1 of [this paper](https://doi.org/10.1016/j.jallcom.2023.170556).
+The 90 binaries include
 
-The 990 binaries include
-
-- 99 binaries based on Mo<sub>x</sub>Nb<sub>_1-x_</sub>, where _x_ varies from 0.01 to 0.99
+- 9 binaries based on Mo<sub>_x_</sub>Nb<sub>1-_x_</sub>, where _x_ varies from 0.1 to 0.9
 - other combinations of metals, including MoTa, MoV, MoW, NbTa, NbV, NbW, TaV, TaW, and VW
 
-The interatomic potential was developed by [Wang et al.](https://doi.org/10.1038/s41524-024-01330-6)
+The interatomic potential was developed by [Wang et al.](https://doi.org/10.1038/s41524-024-01330-6).
 
 Note: Pay attention to the amount of data in our \$HOME. They can build up quickly. Once the data exceeds 20 GB, we won't be able to run anything. In addition, it may be wise to [run those high-throughput simulations automatically](https://github.com/RichardBrinlee/USFE25_high_throughput), as opposed to manually making changes to the files.
 
@@ -23,62 +21,33 @@ LAMMPS on [OSCER](http://www.ou.edu/oscer.html) likely does not come with many p
 
 To install LAMMPS with MLIP, use the file `lmp_mlip.sh` in the `MTP/` directory in this GitHub repository. First, cd to any directory on OSCER, e.g., \$HOME, then
 
+	el9
 	sh lmp_mlip.sh
 
-Note that the second and third commands in `lmp_mlip.sh` will load modules. If one cannot load them, try `module purge` first.
+Note that the 6th and 7th commands in `lmp_mlip.sh` will load modules. If one cannot load them, try `module purge` first.
 
-Once the `sh` run is finished, we should find a file `lmp_intel_cpu_intelmpi` in the `lammps-mtp/interface-lammps-mlip-2/` directory on OSCER. And that is the LAMMPS executable with MLIP.
+Once the `sh` run is finished, we should find a file `lmp_intel_cpu_intelmpi` in the `software/lammps-mtp/interface-lammps-mlip-2/` directory on OSCER. And that is the LAMMPS executable with MLIP.
 
-In practice, with 4 CPU cores, each lattice parametr calculation and GSFE calculation takes about 15 mins and 1 min, respectively.
+Note that we need to exit the el9 container by `exit` before running any LAMMPS simulations. Each time we run a new type of simulation, create a new directory.
 
-Each time we run a new type of simulation, create a new directory.
+## CSRO
 
-## Ternaries
+### Mo<sub>0.1</sub>Nb<sub>0.9</sub>
 
-All 10 ternaries are equal-molar.
-
-### MoNbTa
-
-#### Lattice parameter
-
-Run a LAMMPS simulation with files `lmp_0K.in`, `lmp.batch`, `fitted.mtp`, and `mlip.ini`. The first two files can be found in the `ternary/lat_para/` directory in this GitHub repository. The other two files, retrieved from [another GitHub repository](https://github.com/ucsdlxg/MoNbTaVW-ML-interatomic-potential-and-CRSS-ML-model), can be found in the `MTP/` directory in this GitHub repository. Submit the job by
+Run a LAMMPS simulation with files `lmp_mcnpt.in`, `lmp.batch`, `fitted.mtp`, and `mlip.ini`. The first file can be found in the `csro/` directory in this GitHub repository. The second file can be found in the `MTP/` directory in this GitHub repository. The other two files, retrieved from [another GitHub repository](https://github.com/ucsdlxg/MoNbTaVW-ML-interatomic-potential-and-CRSS-ML-model), can be found in the `MTP/` directory in this GitHub repository. Submit the job by
 
 	sbatch lmp.batch
 
-Once it is finished, we will find a new file `a_E`. The first column is the ratio of the trial lattice parameter to 3.3, the second column is the trial lattice parameter itself, in units of Angstrom, the thrid column is the cohesive energy, in units of eV. If we plot a curve with the second column as the _x_ axis and the third column as the _y_ axis, the curve should look like the ones in Figure 1(a) of [this paper](http://dx.doi.org/10.1016/j.commatsci.2021.110942).
+Once it is finished, we will find a new data file `data.GSFE` which will be used later.
 
-Then run `sh min.sh` to find out the trial lattice parameter corresponding to the lowest cohesive energy (i.e., the minimum on that curve), and that would be the actual lattice parameter. Specifically, we will see three numbers on the screen. The second number is the actual lattice parameter of MoNbTa. Let's call it $a_0$.
+### Mo<sub>0.2</sub>Nb<sub>0.8</sub> to Mo<sub>0.9</sub>Nb<sub>0.1</sub>
 
-#### GSFE
+For each alloy, make two changes to `lmp_mcnpt.in`
 
-##### Plane 1
+- line 15, use the corresponding lattice parameter, which can be found in the file `random.xlsx` in this GitHub repository.
+- line 36, replace `0.1` with _x_ in Mo<sub>_x_</sub>Nb<sub>1-_x_</sub>
 
-The simulation requires files 
-`lmp_gsfe.in`, `lmp.batch`, `fitted.mtp`, and `mlip.ini`. The first two files can be found in the `ternary/gsfe/` directory in this GitHub repository.
-
-Modify `lmp_gsfe.in`:
-
-- line 16, replace the number `3.3` with $a_0$
-
-Then run the simulation. Once it is finished, we will find a new file `gsfe_ori`. Run
-
-	sh gsfe_curve.sh
-
-which would yield a new file `gsfe`. The first column is the displacement along the $\left<111\right>$ direction while the second column is the GSFE value, in units of mJ/m<sup>2</sup>. The USFE is the peak GSFE value.
-
-##### Other planes
-
-According to [this paper](http://dx.doi.org/10.1016/j.intermet.2020.106844), in an alloy, multiple GSFE curves should be calculated. Hence, we need to make three changes to `lmp_gsfe.in`:
-
-- line 16, replace the number `3.3` with $a_0$
-- line 37, change the number `134` to any other integer
-- line 38, change the number `384` to any other integer
-
-Then run the simulation and obtain another USFE value.
-
-Modifying the two integers in `lmp_gsfe.in` again and we will have another USFE. Repeat the step many times until we have 20 USFE values. Then calculate the mean USFE value.
-
-### MoNbV
+### Mo<sub>_x_</sub>Ta<sub>1-_x_</sub>
 
 The MTP files used here specify the five elements for each type:
 
@@ -88,61 +57,67 @@ The MTP files used here specify the five elements for each type:
 	type 4: Mo
 	type 5: W
 
-In `lmp_0K.in` and `lmp_gsfe.in` for MoNbTa, there are three lines:
+In the input file for Mo<sub>0.1</sub>Nb<sub>0.9</sub>, there are two lines:
+
+	create_atoms 2 box
+	set type 2 type/ratio 4 0.1 134
+
+The first line fill the box with all Nb atoms (type 2). The second line randomly changes 10% of Nb atoms (type 2) to Mo atoms (type 4).
+
+Therefore, to study Mo<sub>_x_</sub>Ta<sub>1-_x_</sub>, we need to modify those two lines to
 
 	create_atoms 1 box
-	set type 1 type/ratio 2 0.3333 134
-	set type 1 type/ratio 4 0.5 384
+	set type 1 type/ratio 4 x 384
 
-The first line fill the box with all Ta atoms. The second line randomly changes 1/3 of Ta atoms (type 1) to Nb atoms (type 2). The third line randomly changes 1/2 of remaining Ta atoms (type 1) to Mo atoms (type 4). As a result, the three elements are equal-molar.
+where _x_ is the atomic percentage of Mo atoms.
 
-Therefore, to study MoNbV, in BOTH input files, we need to modify those three lines to
+### Other binary alloys
 
-	create_atoms 2 box
-	set type 2 type/ratio 3 0.3333 134
-	set type 2 type/ratio 4 0.5 384
+The same logic can be applied to all other binary alloys. For example, for V<sub>0.3</sub>W<sub>0.7</sub>, those two lines should be
 
-Alternatively, we can change them to
+	create_atoms 5 box
+	set type 5 type/ratio 3 0.3 384
 
-	create_atoms 3 box
-	set type 3 type/ratio 2 0.3333 134
-	set type 3 type/ratio 4 0.5 384
+## GSFE for any alloy
 
-or
+### Plane 1
 
-	create_atoms 4 box
-	set type 4 type/ratio 2 0.3333 134
-	set type 4 type/ratio 3 0.5 384
+The simulation requires files 
+`lmp_gsfe.in`, `data.CSRO` `lmp.batch`, `fitted.mtp`, and `mlip.ini`. The first file can be found in the `gsfe/` directory in this GitHub repository. The second file is the exact data file generated previously for a given alloy.
 
-Then follow the same procedures for MoNbTa to calculate the lattice parameter and mean USFE value for MoNbV.
+Modify `lmp_gsfe.in`:
 
-### Other eight ternaries
+- line 16, replace the number `3.3` with the corresponding lattice parameter
 
-Follow the same procedures, we can calculate the lattice parameters and mean USFE values in other eight ternaries. Don't forget to modify the LAMMPS input files accordingly for each alloy.
+Then run the simulation. Once it is finished, we will find a new file `gsfe_ori`. Run
 
-## Binaries
+	sh gsfe_curve.sh
 
-The 990 binaries consist of 10 equal-molar alloys and 980 non-equal-molar alloys.
+which would yield a new file `gsfe`. The first column is the displacement along the $\left<111\right>$ direction while the second column is the GSFE value, in units of mJ/m<sup>2</sup>. The USFE is the peak GSFE value.
 
-The files in the `binary/` directory in this GitHub repository are for Mo<sub>0.99</sub>Nb<sub>0.01</sub>, because of these two lines:
+### Plane 2
 
-	create_atoms 2 box
-	set type 2 type/ratio 4 0.99 134
+According to [this paper](http://dx.doi.org/10.1016/j.intermet.2020.106844), in an alloy, multiple GSFE curves should be calculated. Hence, we need to make a change to `lmp_gsfe.in`:
 
-For the next binary, Mo<sub>0.98</sub>Nb<sub>0.02</sub>, those two lines should be modified to
+- line 54, change the number `1` to `2`
 
-	create_atoms 2 box
-	set type 2 type/ratio 4 0.98 134
+Then run the simulation and obtain another GSFE curve and another USFE value.
 
-Follow the same procedures, we can calculate the lattice parameters and mean USFE values in all other binaries. Don't forget to modify the LAMMPS input files accordingly for each alloy.
+### Other planes
 
-## Quaternaries and quinary
+Increase the integer in line 54 of `lmp_gsfe.in` from 3 to 20 to obtain 20 USFE values in total. Then calculate the mean USFE value.
 
-All quaternaries and quinary are equal-molar. Their lattice parameters and GSFEs can be calculated using a similar approach as above.
+## Contributors
 
-## Machine learning models
+<!--A huge thank you to the first 20 contributors who ran simulations for the final project in Dr. Shuozhi Xu's [Computational Materials Science course in Spring 2026](https://shuozhixu.github.io/teaching/spring-2026/AME4970-5970-Syllabus.pdf) at the University of Oklahoma!-->
 
-Based on all data, we then train one ore more machine learning (ML) models, which can be found in [another GitHub repository](https://github.com/RichardBrinlee/Material-research). The inputs of the ML models include (i) properties of pure metals and (ii) chemical compositions of alloys. The outputs of the ML models are the properties of alloys.
+xxxx
+
+- Mo<sub>0.1</sub>Nb<sub>0.9</sub>, Mo<sub>0.2</sub>Nb<sub>0.8</sub>, Mo<sub>0.3</sub>Nb<sub>0.7</sub>, Mo<sub>0.4</sub>Nb<sub>0.6</sub>
+
+Mustafa Alhayek
+
+- Mo<sub>0.5</sub>Nb<sub>0.5</sub>, Mo<sub>0.5</sub>Ta<sub>0.5</sub>, Mo<sub>0.5</sub>V<sub>0.5</sub>, Mo<sub>0.5</sub>W<sub>0.5</sub>, Nb<sub>0.5</sub>Ta<sub>0.5</sub>, Nb<sub>0.5</sub>V<sub>0.5</sub>, Nb<sub>0.5</sub>W<sub>0.5</sub>, Ta<sub>0.5</sub>V<sub>0.5</sub>, Ta<sub>0.5</sub>W<sub>0.5</sub>, V<sub>0.5</sub>W<sub>0.5</sub>
 
 ## Reference
 

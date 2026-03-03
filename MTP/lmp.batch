@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+#SBATCH --job-name=lmp
+#SBATCH --container=el9hw
+#SBATCH --partition=cm3atou_el9
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=16
+#SBATCH --output=lmp.out
+#SBATCH --error=lmp.err
+#SBATCH --mail-user=youremailaddress@yourinstitution.edu
+#SBATCH --mail-type=ALL
+#
+#################################################
+
+# Defining the executable and scratch directory
+
+module load intel/2023b
+
+# execute lammps
+echo "begin lammps"
+echo "the job is ${SLURM_JOB_ID}"
+
+rm -f dump.* gsfe_ori
+
+mpirun ~/software/lammps-mtp/interface-lammps-mlip-2/lmp_intel_cpu_intelmpi -in lmp.in
+
+echo "lammps out"
+
