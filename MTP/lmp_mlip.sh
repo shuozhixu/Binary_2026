@@ -20,5 +20,8 @@ cp ../mlip-2/lib/lib_mlip_interface.a .
 cd ..
 wget --no-check-certificate https://download.lammps.org/tars/lammps-22Dec2022.tar.gz
 tar -xf lammps-22Dec2022.tar.gz
-cd interface-lammps-mlip-2
+cd lammps-22Dec2022/src
+make yes-manybody
+make yes-mc
+cd ../../interface-lammps-mlip-2
 ./install.sh ../lammps-22Dec2022 intel_cpu_intelmpi

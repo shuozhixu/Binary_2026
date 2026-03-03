@@ -34,7 +34,7 @@ Note that we need to exit the el9 container by `exit` before running any LAMMPS 
 
 ### Mo<sub>0.1</sub>Nb<sub>0.9</sub>
 
-Run a LAMMPS simulation with files `lmp_mcnpt.in`, `lmp.batch`, `fitted.mtp`, and `mlip.ini`. The first file can be found in the `csro/` directory in this GitHub repository. The second file can be found in the `MTP/` directory in this GitHub repository. The other two files, retrieved from [another GitHub repository](https://github.com/ucsdlxg/MoNbTaVW-ML-interatomic-potential-and-CRSS-ML-model), can be found in the `MTP/` directory in this GitHub repository. Submit the job by
+Run a LAMMPS simulation with files `lmp_mcnpt.in`, `lmp.batch`, `fitted.mtp`, and `mlip.ini`. The first file can be found in the `csro/` directory in this GitHub repository. The second file can be found in this GitHub repository. The other two files, retrieved from [another GitHub repository](https://github.com/ucsdlxg/MoNbTaVW-ML-interatomic-potential-and-CRSS-ML-model), can be found in the `MTP/` directory in this GitHub repository. Make sure the correct input file name is used in `lmp.batch`, and submit the job by
 
 	sbatch lmp.batch
 
@@ -57,26 +57,29 @@ The MTP files used here specify the five elements for each type:
 	type 4: Mo
 	type 5: W
 
-In the input file for Mo<sub>0.1</sub>Nb<sub>0.9</sub>, there are two lines:
+In the input file for Mo<sub>0.1</sub>Nb<sub>0.9</sub>, there are three lines:
 
 	create_atoms 2 box
 	set type 2 type/ratio 4 0.1 134
+	fix 1 all atom/swap 1 1 114514 ${temperature} types 2 4
 
-The first line fill the box with all Nb atoms (type 2). The second line randomly changes 10% of Nb atoms (type 2) to Mo atoms (type 4).
+The first line fill the box with all Nb atoms (type 2). The second line randomly changes 10% of Nb atoms (type 2) to Mo atoms (type 4). The third line swaps Nb atoms (type 2) with Mo atoms (type 4). 
 
-Therefore, to study Mo<sub>_x_</sub>Ta<sub>1-_x_</sub>, we need to modify those two lines to
+Therefore, to study Mo<sub>_x_</sub>Ta<sub>1-_x_</sub>, we need to modify those three lines to
 
 	create_atoms 1 box
 	set type 1 type/ratio 4 x 384
+	fix 1 all atom/swap 1 1 114514 ${temperature} types 1 4
 
 where _x_ is the atomic percentage of Mo atoms.
 
 ### Other binary alloys
 
-The same logic can be applied to all other binary alloys. For example, for V<sub>0.3</sub>W<sub>0.7</sub>, those two lines should be
+The same logic can be applied to all other binary alloys. For example, for V<sub>0.3</sub>W<sub>0.7</sub>, those three lines should be
 
 	create_atoms 5 box
 	set type 5 type/ratio 3 0.3 384
+	fix 1 all atom/swap 1 1 114514 ${temperature} types 5 3
 
 ## GSFE for any alloy
 
