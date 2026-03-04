@@ -2,13 +2,13 @@
 
 ## Foreword
 
-The purpose of this project is to calculate the generalized stacking fault energies (GSFEs) of 90 binaries. The peak value of the GSFE curve is called the unstable stacking fault energy (USFE).
+The purpose of this project is to calculate the generalized stacking fault energies (GSFEs) of 110 binaries. The peak value of the GSFE curve is called the unstable stacking fault energy (USFE).
 
-All alloys have a body-centered cubic (BCC) lattice. For each alloy, we need to run 1 LAMMPS simulations to generate the chemical short-range order (CSRO) structure and 20 LAMMPS simulations to obtain the mean GSFE curve. Therefore, in total 1,890 LAMMPS simulations are needed. The GSFE curves of the random structures of these binaries were presented in [our previous paper](https://doi.org/10.1007/s11837-025-07728-x).
+All alloys have a body-centered cubic (BCC) lattice. For each alloy, we need to run 1 LAMMPS simulations to generate the chemical short-range order (CSRO) structure and 20 LAMMPS simulations to obtain the mean GSFE curve. Therefore, in total 2,310 LAMMPS simulations are needed. The GSFE curves of the random structures of these binaries were presented in [our previous paper](https://doi.org/10.1007/s11837-025-07728-x).
 
-The 90 binaries include
+The 110 binaries include
 
-- 9 binaries based on Mo<sub>_x_</sub>Nb<sub>1-_x_</sub>, where _x_ varies from 0.1 to 0.9
+- 11 binaries based on Mo<sub>_x_</sub>Nb<sub>1-_x_</sub>, where _x_ varies from 0.1 to 0.9, plus where _x_ = 0.05 and _x_ = 0.95
 - other combinations of metals, including MoTa, MoV, MoW, NbTa, NbV, NbW, TaV, TaW, and VW
 
 The interatomic potential was developed by [Wang et al.](https://doi.org/10.1038/s41524-024-01330-6).
@@ -32,7 +32,7 @@ Note that we need to exit the el9 container by `exit` before running any LAMMPS 
 
 ## CSRO
 
-### Mo<sub>0.1</sub>Nb<sub>0.9</sub>
+### Mo<sub>0.05</sub>Nb<sub>0.95</sub>
 
 Run a LAMMPS simulation with files `lmp_mcnpt.in`, `lmp.batch`, `fitted.mtp`, and `mlip.ini`. The first file can be found in the `csro/` directory in this GitHub repository. The second file can be found in this GitHub repository. The other two files can be found in the `potential/` directory in [another GitHub repository](https://github.com/ucsdlxg/MoNbTaVW-ML-interatomic-potential-and-CRSS-ML-model). Make sure the correct input file name and partition are used in `lmp.batch`, and submit the job by
 
@@ -40,12 +40,12 @@ Run a LAMMPS simulation with files `lmp_mcnpt.in`, `lmp.batch`, `fitted.mtp`, an
 
 The job should be finished in 20 to 24 hours. Once it is finished, we will find a new data file `data.GSFE` which will be used later.
 
-### Mo<sub>0.2</sub>Nb<sub>0.8</sub> to Mo<sub>0.9</sub>Nb<sub>0.1</sub>
+### From Mo<sub>0.1</sub>Nb<sub>0.9</sub> to Mo<sub>0.95</sub>Nb<sub>0.05</sub>
 
 For each alloy, make two changes to `lmp_mcnpt.in`
 
 - line 15, use the corresponding lattice parameter, which can be found in the file `random.xlsx` in this GitHub repository.
-- line 36, replace `0.1` with _x_ in Mo<sub>_x_</sub>Nb<sub>1-_x_</sub>
+- line 36, replace `0.05` with _x_ in Mo<sub>_x_</sub>Nb<sub>1-_x_</sub>
 
 ### Mo<sub>_x_</sub>Ta<sub>1-_x_</sub>
 
@@ -57,13 +57,13 @@ The MTP files used here specify the five elements for each type:
 	type 4: Mo
 	type 5: W
 
-In the input file for Mo<sub>0.1</sub>Nb<sub>0.9</sub>, there are three lines:
+In the input file for Mo<sub>0.05</sub>Nb<sub>0.95</sub>, there are three lines:
 
 	create_atoms 2 box
-	set type 2 type/ratio 4 0.1 134
+	set type 2 type/ratio 4 0.05 134
 	fix 1 all atom/swap 1 1 114514 ${temperature} types 2 4
 
-The first line fill the box with all Nb atoms (type 2). The second line randomly changes 10% of Nb atoms (type 2) to Mo atoms (type 4). The third line swaps Nb atoms (type 2) with Mo atoms (type 4). 
+The first line fill the box with all Nb atoms (type 2). The second line randomly changes 5% of Nb atoms (type 2) to Mo atoms (type 4). The third line swaps Nb atoms (type 2) with Mo atoms (type 4). 
 
 Therefore, to study Mo<sub>_x_</sub>Ta<sub>1-_x_</sub>, we need to modify those three lines to
 
@@ -116,87 +116,91 @@ Increase the integer in line 54 of `lmp_gsfe.in` from 3 to 20 to obtain 20 USFE 
 
 1
 
-- Mo<sub>0.1</sub>Nb<sub>0.9</sub>, Mo<sub>0.2</sub>Nb<sub>0.8</sub>, Mo<sub>0.3</sub>Nb<sub>0.7</sub>, Mo<sub>0.4</sub>Nb<sub>0.6</sub>
+- Mo<sub>0.05</sub>Nb<sub>0.95</sub>, Mo<sub>0.1</sub>Nb<sub>0.9</sub>, Mo<sub>0.2</sub>Nb<sub>0.8</sub>, Mo<sub>0.3</sub>Nb<sub>0.7</sub>, Mo<sub>0.4</sub>Nb<sub>0.6</sub>
 
 2
 
-- Mo<sub>0.6</sub>Nb<sub>0.4</sub>, Mo<sub>0.7</sub>Nb<sub>0.3</sub>, Mo<sub>0.8</sub>Nb<sub>0.2</sub>, Mo<sub>0.9</sub>Nb<sub>0.1</sub>
+- Mo<sub>0.6</sub>Nb<sub>0.4</sub>, Mo<sub>0.7</sub>Nb<sub>0.3</sub>, Mo<sub>0.8</sub>Nb<sub>0.2</sub>, Mo<sub>0.9</sub>Nb<sub>0.1</sub>, Mo<sub>0.95</sub>Nb<sub>0.05</sub>
 
 3
 
-- Mo<sub>0.1</sub>Ta<sub>0.9</sub>, Mo<sub>0.2</sub>Ta<sub>0.8</sub>, Mo<sub>0.3</sub>Ta<sub>0.7</sub>, Mo<sub>0.4</sub>Ta<sub>0.6</sub>
+- Mo<sub>0.05</sub>Ta<sub>0.95</sub>, Mo<sub>0.1</sub>Ta<sub>0.9</sub>, Mo<sub>0.2</sub>Ta<sub>0.8</sub>, Mo<sub>0.3</sub>Ta<sub>0.7</sub>, Mo<sub>0.4</sub>Ta<sub>0.6</sub>
 
 4
 
-- Mo<sub>0.6</sub>Ta<sub>0.4</sub>, Mo<sub>0.7</sub>Ta<sub>0.3</sub>, Mo<sub>0.8</sub>Ta<sub>0.2</sub>, Mo<sub>0.9</sub>Ta<sub>0.1</sub>
+- Mo<sub>0.6</sub>Ta<sub>0.4</sub>, Mo<sub>0.7</sub>Ta<sub>0.3</sub>, Mo<sub>0.8</sub>Ta<sub>0.2</sub>, Mo<sub>0.9</sub>Ta<sub>0.1</sub>, Mo<sub>0.95</sub>Ta<sub>0.05</sub>
 
 5
 
-- Mo<sub>0.1</sub>V<sub>0.9</sub>, Mo<sub>0.2</sub>V<sub>0.8</sub>, Mo<sub>0.3</sub>V<sub>0.7</sub>, Mo<sub>0.4</sub>V<sub>0.6</sub>
+- Mo<sub>0.05</sub>V<sub>0.95</sub>, Mo<sub>0.1</sub>V<sub>0.9</sub>, Mo<sub>0.2</sub>V<sub>0.8</sub>, Mo<sub>0.3</sub>V<sub>0.7</sub>, Mo<sub>0.4</sub>V<sub>0.6</sub>
 
 6
 
-- Mo<sub>0.6</sub>V<sub>0.4</sub>, Mo<sub>0.7</sub>V<sub>0.3</sub>, Mo<sub>0.8</sub>V<sub>0.2</sub>, Mo<sub>0.9</sub>V<sub>0.1</sub>
+- Mo<sub>0.6</sub>V<sub>0.4</sub>, Mo<sub>0.7</sub>V<sub>0.3</sub>, Mo<sub>0.8</sub>V<sub>0.2</sub>, Mo<sub>0.9</sub>V<sub>0.1</sub>, Mo<sub>0.95</sub>V<sub>0.05</sub>
 
 7
 
-- Mo<sub>0.1</sub>W<sub>0.9</sub>, Mo<sub>0.2</sub>W<sub>0.8</sub>, Mo<sub>0.3</sub>W<sub>0.7</sub>, Mo<sub>0.4</sub>W<sub>0.6</sub>
+- Mo<sub>0.05</sub>W<sub>0.95</sub>, Mo<sub>0.1</sub>W<sub>0.9</sub>, Mo<sub>0.2</sub>W<sub>0.8</sub>, Mo<sub>0.3</sub>W<sub>0.7</sub>, Mo<sub>0.4</sub>W<sub>0.6</sub>
 
 8
 
-- Mo<sub>0.6</sub>W<sub>0.4</sub>, Mo<sub>0.7</sub>W<sub>0.3</sub>, Mo<sub>0.8</sub>W<sub>0.2</sub>, Mo<sub>0.9</sub>W<sub>0.1</sub>
+- Mo<sub>0.6</sub>W<sub>0.4</sub>, Mo<sub>0.7</sub>W<sub>0.3</sub>, Mo<sub>0.8</sub>W<sub>0.2</sub>, Mo<sub>0.9</sub>W<sub>0.1</sub>, Mo<sub>0.95</sub>W<sub>0.05</sub>
 
 9
 
-- Nb<sub>0.1</sub>Ta<sub>0.9</sub>, Nb<sub>0.2</sub>Ta<sub>0.8</sub>, Nb<sub>0.3</sub>Ta<sub>0.7</sub>, Nb<sub>0.4</sub>Ta<sub>0.6</sub>
+- Nb<sub>0.05</sub>Ta<sub>0.95</sub>, Nb<sub>0.1</sub>Ta<sub>0.9</sub>, Nb<sub>0.2</sub>Ta<sub>0.8</sub>, Nb<sub>0.3</sub>Ta<sub>0.7</sub>, Nb<sub>0.4</sub>Ta<sub>0.6</sub>
 
 10
 
-- Nb<sub>0.6</sub>Ta<sub>0.4</sub>, Nb<sub>0.7</sub>Ta<sub>0.3</sub>, Nb<sub>0.8</sub>Ta<sub>0.2</sub>, Nb<sub>0.9</sub>Ta<sub>0.1</sub>
+- Nb<sub>0.6</sub>Ta<sub>0.4</sub>, Nb<sub>0.7</sub>Ta<sub>0.3</sub>, Nb<sub>0.8</sub>Ta<sub>0.2</sub>, Nb<sub>0.9</sub>Ta<sub>0.1</sub>, Nb<sub>0.95</sub>Ta<sub>0.05</sub>
 
 11
 
-- Nb<sub>0.1</sub>V<sub>0.9</sub>, Nb<sub>0.2</sub>V<sub>0.8</sub>, Nb<sub>0.3</sub>V<sub>0.7</sub>, Nb<sub>0.4</sub>V<sub>0.6</sub>
+- Nb<sub>0.05</sub>V<sub>0.95</sub>, Nb<sub>0.1</sub>V<sub>0.9</sub>, Nb<sub>0.2</sub>V<sub>0.8</sub>, Nb<sub>0.3</sub>V<sub>0.7</sub>, Nb<sub>0.4</sub>V<sub>0.6</sub>
 
 12
 
-- Nb<sub>0.6</sub>V<sub>0.4</sub>, Nb<sub>0.7</sub>V<sub>0.3</sub>, Nb<sub>0.8</sub>V<sub>0.2</sub>, Nb<sub>0.9</sub>V<sub>0.1</sub>
+- Nb<sub>0.6</sub>V<sub>0.4</sub>, Nb<sub>0.7</sub>V<sub>0.3</sub>, Nb<sub>0.8</sub>V<sub>0.2</sub>, Nb<sub>0.9</sub>V<sub>0.1</sub>, Nb<sub>0.95</sub>V<sub>0.05</sub>
 
 13
 
-- Nb<sub>0.1</sub>W<sub>0.9</sub>, Nb<sub>0.2</sub>W<sub>0.8</sub>, Nb<sub>0.3</sub>W<sub>0.7</sub>, Nb<sub>0.4</sub>W<sub>0.6</sub>
+- Nb<sub>0.05</sub>W<sub>0.95</sub>, Nb<sub>0.1</sub>W<sub>0.9</sub>, Nb<sub>0.2</sub>W<sub>0.8</sub>, Nb<sub>0.3</sub>W<sub>0.7</sub>, Nb<sub>0.4</sub>W<sub>0.6</sub>
 
 14
 
-- Nb<sub>0.6</sub>W<sub>0.4</sub>, Nb<sub>0.7</sub>W<sub>0.3</sub>, Nb<sub>0.8</sub>W<sub>0.2</sub>, Nb<sub>0.9</sub>W<sub>0.1</sub>
+- Nb<sub>0.6</sub>W<sub>0.4</sub>, Nb<sub>0.7</sub>W<sub>0.3</sub>, Nb<sub>0.8</sub>W<sub>0.2</sub>, Nb<sub>0.9</sub>W<sub>0.1</sub>, Nb<sub>0.95</sub>W<sub>0.05</sub>
 
 15
 
-- Ta<sub>0.1</sub>V<sub>0.9</sub>, Ta<sub>0.2</sub>V<sub>0.8</sub>, Ta<sub>0.3</sub>V<sub>0.7</sub>, Ta<sub>0.4</sub>V<sub>0.6</sub>
+- Ta<sub>0.05</sub>V<sub>0.95</sub>, Ta<sub>0.1</sub>V<sub>0.9</sub>, Ta<sub>0.2</sub>V<sub>0.8</sub>, Ta<sub>0.3</sub>V<sub>0.7</sub>, Ta<sub>0.4</sub>V<sub>0.6</sub>
 
 16
 
-- Ta<sub>0.6</sub>V<sub>0.4</sub>, Ta<sub>0.7</sub>V<sub>0.3</sub>, Ta<sub>0.8</sub>V<sub>0.2</sub>, Ta<sub>0.9</sub>V<sub>0.1</sub>
+- Ta<sub>0.6</sub>V<sub>0.4</sub>, Ta<sub>0.7</sub>V<sub>0.3</sub>, Ta<sub>0.8</sub>V<sub>0.2</sub>, Ta<sub>0.9</sub>V<sub>0.1</sub>, Ta<sub>0.95</sub>V<sub>0.05</sub>
 
 17
 
-- Ta<sub>0.1</sub>W<sub>0.9</sub>, Ta<sub>0.2</sub>W<sub>0.8</sub>, Ta<sub>0.3</sub>W<sub>0.7</sub>, Ta<sub>0.4</sub>W<sub>0.6</sub>
+- Ta<sub>0.05</sub>W<sub>0.95</sub>, Ta<sub>0.1</sub>W<sub>0.9</sub>, Ta<sub>0.2</sub>W<sub>0.8</sub>, Ta<sub>0.3</sub>W<sub>0.7</sub>, Ta<sub>0.4</sub>W<sub>0.6</sub>
 
 18
 
-- Ta<sub>0.6</sub>W<sub>0.4</sub>, Ta<sub>0.7</sub>W<sub>0.3</sub>, Ta<sub>0.8</sub>W<sub>0.2</sub>, Ta<sub>0.9</sub>W<sub>0.1</sub>
+- Ta<sub>0.6</sub>W<sub>0.4</sub>, Ta<sub>0.7</sub>W<sub>0.3</sub>, Ta<sub>0.8</sub>W<sub>0.2</sub>, Ta<sub>0.9</sub>W<sub>0.1</sub>, Ta<sub>0.95</sub>W<sub>0.05</sub>
 
 19
 
-- V<sub>0.1</sub>W<sub>0.9</sub>, V<sub>0.2</sub>W<sub>0.8</sub>, V<sub>0.3</sub>W<sub>0.7</sub>, V<sub>0.4</sub>W<sub>0.6</sub>
+- V<sub>0.05</sub>W<sub>0.95</sub>, V<sub>0.1</sub>W<sub>0.9</sub>, V<sub>0.2</sub>W<sub>0.8</sub>, V<sub>0.3</sub>W<sub>0.7</sub>, V<sub>0.4</sub>W<sub>0.6</sub>
 
 20
 
-- V<sub>0.6</sub>W<sub>0.4</sub>, V<sub>0.7</sub>W<sub>0.3</sub>, V<sub>0.8</sub>W<sub>0.2</sub>, V<sub>0.9</sub>W<sub>0.1</sub>
+- V<sub>0.6</sub>W<sub>0.4</sub>, V<sub>0.7</sub>W<sub>0.3</sub>, V<sub>0.8</sub>W<sub>0.2</sub>, V<sub>0.9</sub>W<sub>0.1</sub>, V<sub>0.95</sub>W<sub>0.05</sub>
 
-Mustafa Alhayek
+21
 
-- Mo<sub>0.5</sub>Nb<sub>0.5</sub>, Mo<sub>0.5</sub>Ta<sub>0.5</sub>, Mo<sub>0.5</sub>V<sub>0.5</sub>, Mo<sub>0.5</sub>W<sub>0.5</sub>, Nb<sub>0.5</sub>Ta<sub>0.5</sub>, Nb<sub>0.5</sub>V<sub>0.5</sub>, Nb<sub>0.5</sub>W<sub>0.5</sub>, Ta<sub>0.5</sub>V<sub>0.5</sub>, Ta<sub>0.5</sub>W<sub>0.5</sub>, V<sub>0.5</sub>W<sub>0.5</sub>
+- Mo<sub>0.5</sub>Nb<sub>0.5</sub>, Mo<sub>0.5</sub>Ta<sub>0.5</sub>, Mo<sub>0.5</sub>V<sub>0.5</sub>, Mo<sub>0.5</sub>W<sub>0.5</sub>, Nb<sub>0.5</sub>Ta<sub>0.5</sub>
+
+22
+
+- Nb<sub>0.5</sub>V<sub>0.5</sub>, Nb<sub>0.5</sub>W<sub>0.5</sub>, Ta<sub>0.5</sub>V<sub>0.5</sub>, Ta<sub>0.5</sub>W<sub>0.5</sub>, V<sub>0.5</sub>W<sub>0.5</sub>
 
 ## Submission
 
