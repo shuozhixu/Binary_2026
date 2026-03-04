@@ -1,4 +1,4 @@
-# Random binary alloys: generalized stacking fault energies
+# Refractory non-dilute random binary alloys: Generalized stacking fault energies
 
 ## Foreword
 
@@ -204,12 +204,14 @@ Increase the integer in line 54 of `lmp_gsfe.in` from 3 to 20 to obtain 20 USFE 
 
 ## Submission
 
-Students who take the Computational Materials Science course in Spring 2026, please submit the following to Canvas for each alloy:
+Students who take the Computational Materials Science course in Spring 2026 shall submit the following to Canvas for each alloy:
 
 - Both `lmp_mcnpt.in` and `lmp_gsfe.in` files
 - The `data.CSRO` file
-- All 20 `gsfe` files
-- All 20 USFE values and the mean USFE value
+- All 20 `gsfe` files, named `gsfe-1`, `gsfe-2` etc
+- All 20 USFE values and the mean USFE value, provided in a text or excel file
+
+Please use five folders, each named after its corresponding alloy (e.g., Mo<sub>0.05</sub>Nb<sub>0.95</sub>).
 
 ## Reference
 
