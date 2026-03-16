@@ -13,7 +13,7 @@ atom_style      atomic
 
 # ------------------- ATOM DEFINE ------------------------------
 
-variable        latparam equal 3.3             #variable
+variable        latparam equal 3.30362999999968             #variable
 
 read_data data.CSRO
 

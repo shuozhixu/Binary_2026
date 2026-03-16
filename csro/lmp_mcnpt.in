@@ -12,7 +12,7 @@ atom_style	atomic
 
 # ------------------- ATOM DEFINE ------------------------------
 
-variable        latparam equal 3.31286999999974             #variable
+variable        latparam equal 3.30362999999968             #variable
 
 variable        xl equal 0
 variable        xh equal 3
