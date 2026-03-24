@@ -118,19 +118,19 @@ Zaid Jasasra
 
 - Mo<sub>0.05</sub>Nb<sub>0.95</sub>, Mo<sub>0.1</sub>Nb<sub>0.9</sub>, Mo<sub>0.2</sub>Nb<sub>0.8</sub>, Mo<sub>0.3</sub>Nb<sub>0.7</sub>, Mo<sub>0.4</sub>Nb<sub>0.6</sub>
 
-2
+Mohamed Arabyat
 
 - Mo<sub>0.6</sub>Nb<sub>0.4</sub>, Mo<sub>0.7</sub>Nb<sub>0.3</sub>, Mo<sub>0.8</sub>Nb<sub>0.2</sub>, Mo<sub>0.9</sub>Nb<sub>0.1</sub>, Mo<sub>0.95</sub>Nb<sub>0.05</sub>
 
-3
+Cassidy Barry
 
 - Mo<sub>0.05</sub>Ta<sub>0.95</sub>, Mo<sub>0.1</sub>Ta<sub>0.9</sub>, Mo<sub>0.2</sub>Ta<sub>0.8</sub>, Mo<sub>0.3</sub>Ta<sub>0.7</sub>, Mo<sub>0.4</sub>Ta<sub>0.6</sub>
 
-4
+Jacob Bussey
 
 - Mo<sub>0.6</sub>Ta<sub>0.4</sub>, Mo<sub>0.7</sub>Ta<sub>0.3</sub>, Mo<sub>0.8</sub>Ta<sub>0.2</sub>, Mo<sub>0.9</sub>Ta<sub>0.1</sub>, Mo<sub>0.95</sub>Ta<sub>0.05</sub>
 
-5
+Caden Chavalitanonda
 
 - Mo<sub>0.05</sub>V<sub>0.95</sub>, Mo<sub>0.1</sub>V<sub>0.9</sub>, Mo<sub>0.2</sub>V<sub>0.8</sub>, Mo<sub>0.3</sub>V<sub>0.7</sub>, Mo<sub>0.4</sub>V<sub>0.6</sub>
 
@@ -138,67 +138,67 @@ Dakota Filibeck
 
 - Mo<sub>0.6</sub>V<sub>0.4</sub>, Mo<sub>0.7</sub>V<sub>0.3</sub>, Mo<sub>0.8</sub>V<sub>0.2</sub>, Mo<sub>0.9</sub>V<sub>0.1</sub>, Mo<sub>0.95</sub>V<sub>0.05</sub>
 
-7
+Max Cheng
 
 - Mo<sub>0.05</sub>W<sub>0.95</sub>, Mo<sub>0.1</sub>W<sub>0.9</sub>, Mo<sub>0.2</sub>W<sub>0.8</sub>, Mo<sub>0.3</sub>W<sub>0.7</sub>, Mo<sub>0.4</sub>W<sub>0.6</sub>
 
-8
+Luke Gilchrest
 
 - Mo<sub>0.6</sub>W<sub>0.4</sub>, Mo<sub>0.7</sub>W<sub>0.3</sub>, Mo<sub>0.8</sub>W<sub>0.2</sub>, Mo<sub>0.9</sub>W<sub>0.1</sub>, Mo<sub>0.95</sub>W<sub>0.05</sub>
 
-9
+Matthew Heath
 
 - Nb<sub>0.05</sub>Ta<sub>0.95</sub>, Nb<sub>0.1</sub>Ta<sub>0.9</sub>, Nb<sub>0.2</sub>Ta<sub>0.8</sub>, Nb<sub>0.3</sub>Ta<sub>0.7</sub>, Nb<sub>0.4</sub>Ta<sub>0.6</sub>
 
-10
+Stryker Herrera
 
 - Nb<sub>0.6</sub>Ta<sub>0.4</sub>, Nb<sub>0.7</sub>Ta<sub>0.3</sub>, Nb<sub>0.8</sub>Ta<sub>0.2</sub>, Nb<sub>0.9</sub>Ta<sub>0.1</sub>, Nb<sub>0.95</sub>Ta<sub>0.05</sub>
 
-11
+Sarah Kemppainen
 
 - Nb<sub>0.05</sub>V<sub>0.95</sub>, Nb<sub>0.1</sub>V<sub>0.9</sub>, Nb<sub>0.2</sub>V<sub>0.8</sub>, Nb<sub>0.3</sub>V<sub>0.7</sub>, Nb<sub>0.4</sub>V<sub>0.6</sub>
 
-12
+Connor Lane
 
 - Nb<sub>0.6</sub>V<sub>0.4</sub>, Nb<sub>0.7</sub>V<sub>0.3</sub>, Nb<sub>0.8</sub>V<sub>0.2</sub>, Nb<sub>0.9</sub>V<sub>0.1</sub>, Nb<sub>0.95</sub>V<sub>0.05</sub>
 
-13
+Samuel Li
 
 - Nb<sub>0.05</sub>W<sub>0.95</sub>, Nb<sub>0.1</sub>W<sub>0.9</sub>, Nb<sub>0.2</sub>W<sub>0.8</sub>, Nb<sub>0.3</sub>W<sub>0.7</sub>, Nb<sub>0.4</sub>W<sub>0.6</sub>
 
-14
+Gabriel Marostegan Mendes
 
 - Nb<sub>0.6</sub>W<sub>0.4</sub>, Nb<sub>0.7</sub>W<sub>0.3</sub>, Nb<sub>0.8</sub>W<sub>0.2</sub>, Nb<sub>0.9</sub>W<sub>0.1</sub>, Nb<sub>0.95</sub>W<sub>0.05</sub>
 
-15
+Logan McMains
 
 - Ta<sub>0.05</sub>V<sub>0.95</sub>, Ta<sub>0.1</sub>V<sub>0.9</sub>, Ta<sub>0.2</sub>V<sub>0.8</sub>, Ta<sub>0.3</sub>V<sub>0.7</sub>, Ta<sub>0.4</sub>V<sub>0.6</sub>
 
-16
+Lucas Ortiz
 
 - Ta<sub>0.6</sub>V<sub>0.4</sub>, Ta<sub>0.7</sub>V<sub>0.3</sub>, Ta<sub>0.8</sub>V<sub>0.2</sub>, Ta<sub>0.9</sub>V<sub>0.1</sub>, Ta<sub>0.95</sub>V<sub>0.05</sub>
 
-17
+Vivek Pranabdev
 
 - Ta<sub>0.05</sub>W<sub>0.95</sub>, Ta<sub>0.1</sub>W<sub>0.9</sub>, Ta<sub>0.2</sub>W<sub>0.8</sub>, Ta<sub>0.3</sub>W<sub>0.7</sub>, Ta<sub>0.4</sub>W<sub>0.6</sub>
 
-18
+Rajan Rijal
 
 - Ta<sub>0.6</sub>W<sub>0.4</sub>, Ta<sub>0.7</sub>W<sub>0.3</sub>, Ta<sub>0.8</sub>W<sub>0.2</sub>, Ta<sub>0.9</sub>W<sub>0.1</sub>, Ta<sub>0.95</sub>W<sub>0.05</sub>
 
-19
+Lauren Robinowitz
 
 - V<sub>0.05</sub>W<sub>0.95</sub>, V<sub>0.1</sub>W<sub>0.9</sub>, V<sub>0.2</sub>W<sub>0.8</sub>, V<sub>0.3</sub>W<sub>0.7</sub>, V<sub>0.4</sub>W<sub>0.6</sub>
 
-20
+Caden Sayers
 
 - V<sub>0.6</sub>W<sub>0.4</sub>, V<sub>0.7</sub>W<sub>0.3</sub>, V<sub>0.8</sub>W<sub>0.2</sub>, V<sub>0.9</sub>W<sub>0.1</sub>, V<sub>0.95</sub>W<sub>0.05</sub>
 
-21
+Jordan Sloan
 
 - Mo<sub>0.5</sub>Nb<sub>0.5</sub>, Mo<sub>0.5</sub>Ta<sub>0.5</sub>, Mo<sub>0.5</sub>V<sub>0.5</sub>, Mo<sub>0.5</sub>W<sub>0.5</sub>, Nb<sub>0.5</sub>Ta<sub>0.5</sub>
 
-22
+Jaelyn Tims
 
 - Nb<sub>0.5</sub>V<sub>0.5</sub>, Nb<sub>0.5</sub>W<sub>0.5</sub>, Ta<sub>0.5</sub>V<sub>0.5</sub>, Ta<sub>0.5</sub>W<sub>0.5</sub>, V<sub>0.5</sub>W<sub>0.5</sub>
 
