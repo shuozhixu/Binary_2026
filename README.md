@@ -114,7 +114,7 @@ Increase the integer in line 54 of `lmp_gsfe.in` from 3 to 20 to obtain 20 USFE 
 
 <!--A huge thank you to the first 20 contributors who ran simulations for the final project in Dr. Shuozhi Xu's [Computational Materials Science course in Spring 2026](https://shuozhixu.github.io/teaching/spring-2026/AME4970-5970-Syllabus.pdf) at the University of Oklahoma!-->
 
-1
+Zaid Jasasra
 
 - Mo<sub>0.05</sub>Nb<sub>0.95</sub>, Mo<sub>0.1</sub>Nb<sub>0.9</sub>, Mo<sub>0.2</sub>Nb<sub>0.8</sub>, Mo<sub>0.3</sub>Nb<sub>0.7</sub>, Mo<sub>0.4</sub>Nb<sub>0.6</sub>
 
