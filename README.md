@@ -38,7 +38,7 @@ Run a LAMMPS simulation with files `lmp_mcnpt.in`, `lmp.batch`, `fitted.mtp`, an
 
 	sbatch lmp.batch
 
-The job should be finished in 50 to 60 hours. Once it is finished, we will find a new data file `data.GSFE` which will be used later.
+The job should be finished in 50 to 60 hours. Once it is finished, we will find a new data file `data.CSRO` which will be used later.
 
 ### From Mo<sub>0.1</sub>Nb<sub>0.9</sub> to Mo<sub>0.95</sub>Nb<sub>0.05</sub>
 
