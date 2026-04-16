@@ -92,7 +92,7 @@ Modify `lmp_gsfe.in`:
 
 - line 16, replace the number `3.3` with the corresponding lattice parameter
 
-Then run the simulation, which should be finished in less than two minutes. Once it is finished, we will find a new file `gsfe_ori`. Run
+Then run the simulation, which should be finished in less than two minutes. This means that even with one core, the simulation would finish within 30 minutes. Once it is finished, we will find a new file `gsfe_ori`. Run
 
 	sh gsfe_curve.sh
 
