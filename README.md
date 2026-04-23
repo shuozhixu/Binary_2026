@@ -38,7 +38,7 @@ Run a LAMMPS simulation with files `lmp_mcnpt.in`, `lmp.batch`, `fitted.mtp`, an
 
 	sbatch lmp.batch
 
-The job should be finished in 50 to 60 hours. Once it is finished, we will find a new data file `data.CSRO` which will be used later.
+The job should be finished in 120 to 168 hours. Once it is finished, we will find a new data file `data.CSRO` which will be used later.
 
 ### From Mo<sub>0.1</sub>Nb<sub>0.9</sub> to Mo<sub>0.95</sub>Nb<sub>0.05</sub>
 
@@ -104,7 +104,7 @@ According to [this paper](http://dx.doi.org/10.1016/j.intermet.2020.106844), in 
 
 - line 54, change the number `1` to `2`
 
-Then run the simulation and obtain another GSFE curve and another USFE value.
+Then rerun the simulation and obtain another GSFE curve and another USFE value.
 
 ### Other planes
 
