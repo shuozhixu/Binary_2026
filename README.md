@@ -68,7 +68,7 @@ The first line fill the box with all Nb atoms (type 2). The second line randomly
 Therefore, to study Mo<sub>_x_</sub>Ta<sub>1-_x_</sub>, we need to modify those three lines to
 
 	create_atoms 1 box
-	set type 1 type/ratio 4 x 384
+	set type 1 type/ratio 4 x 134
 	fix 1 all atom/swap 1 1 114514 ${temperature} types 1 4
 
 where _x_ is the atomic percentage of Mo atoms.
@@ -78,7 +78,7 @@ where _x_ is the atomic percentage of Mo atoms.
 Changes should be made to the input file for all other binary alloys. For example, for V<sub>0.3</sub>W<sub>0.7</sub>, those three lines should be
 
 	create_atoms 5 box
-	set type 5 type/ratio 3 0.3 384
+	set type 5 type/ratio 3 0.3 134
 	fix 1 all atom/swap 1 1 114514 ${temperature} types 5 3
 
 ## GSFE for any alloy
