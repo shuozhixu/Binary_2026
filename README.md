@@ -112,7 +112,7 @@ Increase the integer in line 54 of `lmp_gsfe.in` from 3 to 20 to obtain 20 USFE 
 
 ## Contributors
 
-<!--A huge thank you to the first 20 contributors who ran simulations for the final project in Dr. Shuozhi Xu's [Computational Materials Science course in Spring 2026](https://shuozhixu.github.io/teaching/spring-2026/AME4970-5970-Syllabus.pdf) at the University of Oklahoma!-->
+A huge thank you to the 22 contributors who ran simulations for the final project in Dr. Shuozhi Xu's [Computational Materials Science course in Spring 2026](https://shuozhixu.github.io/teaching/spring-2026/AME4970-5970-Syllabus.pdf) at the University of Oklahoma!
 
 Zaid Jasasra
 
@@ -202,7 +202,7 @@ Jaelyn Tims
 
 - Nb<sub>0.5</sub>V<sub>0.5</sub>, Nb<sub>0.5</sub>W<sub>0.5</sub>, Ta<sub>0.5</sub>V<sub>0.5</sub>, Ta<sub>0.5</sub>W<sub>0.5</sub>, V<sub>0.5</sub>W<sub>0.5</sub>
 
-## Submission
+<!--## Submission
 
 Students who take the Computational Materials Science course in Spring 2026 shall submit the following to the "Data submission" assignment on Canvas for each alloy:
 
@@ -213,7 +213,7 @@ Students who take the Computational Materials Science course in Spring 2026 shal
 - All 20 `gsfe` files, named `gsfe-1`, `gsfe-2` etc, where `1` or `2` is the integer number in line 54 of the corresponding `lmp_gsfe.in` file
 - All 20 USFE values and the mean USFE value, provided in a text or excel file
 
-Please use five folders, each named after its corresponding alloy (e.g., Mo<sub>0.05</sub>Nb<sub>0.95</sub>).
+Please use five folders, each named after its corresponding alloy (e.g., Mo<sub>0.05</sub>Nb<sub>0.95</sub>).-->
 
 ## Reference
 
