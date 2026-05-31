@@ -99,11 +99,9 @@ kljl
 
 ## Elastic constants
 
-For each alloy, run a simulation with files `in.elastic`, `displace.mod`, `init.mod`, `potential.mod`, `fitted.mtp`, `mlip.ini`, and `data.CSRO`.
+For each alloy, run a LAMMPS simulation with files `in.elastic`, `displace.mod`, `init.mod`, `potential.mod`, `fitted.mtp`, `mlip.ini`, and `data.CSRO`. The first four files can be found in the `ela_const/` directory in this GitHub repository. In the batch file, designate `in.elastic` as the input file.
 
-Once it is finished, we will find an output file, `*.out`, at the end of which we will find values of C11all, C12all etc. Those are the elastic constants. Since they are in the [11-2]-[111]-[1-10] system (recall the `lmp_mcnpt.in` file), they should be [converted](https://github.com/shuozhixu/elastic_tensor) to those in the [100]-[010]-[001] system.
-
-Once converted, using Equations 10-12 of [this paper](https://doi.org/10.1016/j.commatsci.2021.110942) to calculate three effective BCC elastic constants.
+Once the simulation is finished, we will find an output file, `*.out`, at the end of which we will find values of C11all, C12all etc. Those are the elastic constants in the [11-2]-[111]-[1-10] system (recall the `lmp_mcnpt.in` file). Hence, they should be [converted](https://github.com/shuozhixu/elastic_tensor) to those in the [100]-[010]-[001] system. Once converted, using Equations 10-12 of [this paper](https://doi.org/10.1016/j.commatsci.2021.110942) to calculate three effective BCC elastic constants.
 
 ## GSFE
 
