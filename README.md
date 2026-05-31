@@ -1,10 +1,10 @@
-# Refractory non-dilute random binary alloys: Generalized stacking fault energies
+# Refractory non-dilute random binary alloys
 
 ## Foreword
 
-The purpose of this project is to calculate the generalized stacking fault energies (GSFEs) of 110 binaries. The peak value of the GSFE curve is called the unstable stacking fault energy (USFE).
+The purpose of this project is to calculate the lattice parameter, lattice distortion, elastic constants, and generalized stacking fault energies (GSFEs) of 110 binaries.
 
-All alloys have a body-centered cubic (BCC) lattice. For each alloy, we need to run 1 LAMMPS simulations to generate the chemical short-range order (CSRO) structure and 20 LAMMPS simulations to obtain the mean GSFE curve. Therefore, in total 2,310 LAMMPS simulations are needed. The GSFE curves of the random structures of these binaries were presented in [our previous paper](https://doi.org/10.1007/s11837-025-07728-x).
+All alloys have a body-centered cubic (BCC) lattice. For each alloy, we need to run 1 LAMMPS simulations to generate the chemical short-range order (CSRO) structure, 3 LAMMPS simulation to calculate its lattice parameter, lattice distortion, and elastic constants, repsectively, and 20 LAMMPS simulations to obtain the mean GSFE curve. Therefore, in total 2,640 LAMMPS simulations are needed. The lattice parameter and GSFE curves of the random structures of these binaries were presented in [our previous paper](https://doi.org/10.1007/s11837-025-07728-x) and can be found in the file `random.xlsx` in this GitHub repository.
 
 The 110 binaries include
 
@@ -44,7 +44,7 @@ The job should be finished in 120 to 168 hours. Once it is finished, we will fin
 
 For each alloy, make two changes to `lmp_mcnpt.in`
 
-- line 15, use the corresponding lattice parameter, which can be found in the file `random.xlsx` in this GitHub repository.
+- line 15, use the lattice parameter of the random alloy with the same composition.
 - line 36, replace `0.05` with _x_ in Mo<sub>_x_</sub>Nb<sub>1-_x_</sub>
 
 ### Mo<sub>_x_</sub>Ta<sub>1-_x_</sub>
@@ -81,7 +81,31 @@ Changes should be made to the input file for all other binary alloys. For exampl
 	set type 5 type/ratio 3 0.3 134
 	fix 1 all atom/swap 1 1 114514 ${temperature} types 5 3
 
-## GSFE for any alloy
+## Lattice parameter
+
+For each alloy, the lattice parameter can be calculated by
+
+	(lx/(2*sqrt(6.))+ly/(3*sqrt(3.))+lz/(16*sqrt(2.)))/3.
+
+where `lx`, `ly`, and `lz` can be found in the data file `data.CSRO`, i.e.,
+
+	lx = xhi - xlo
+	ly = yhi - ylo
+	lz = zhi - zlo
+
+## Lattice distortion
+
+kljl
+
+## Elastic constants
+
+For each alloy, run a simulation with files `in.elastic`, `displace.mod`, `init.mod`, `potential.mod`, `fitted.mtp`, `mlip.ini`, and `data.CSRO`.
+
+Once it is finished, we will find an output file, `*.out`, at the end of which we will find values of C11all, C12all etc. Those are the elastic constants. Since they are in the [11-2]-[111]-[1-10] system (recall the `lmp_mcnpt.in` file), they should be [converted](https://github.com/shuozhixu/elastic_tensor) to those in the [100]-[010]-[001] system.
+
+Once converted, using Equations 10-12 of [this paper](https://doi.org/10.1016/j.commatsci.2021.110942) to calculate three effective BCC elastic constants.
+
+## GSFE
 
 ### Plane 1
 
@@ -96,7 +120,7 @@ Then run the simulation, which should be finished in less than two minutes. This
 
 	sh gsfe_curve.sh
 
-which would yield a new file `gsfe`. The first column is the displacement along the $\left<111\right>$ direction while the second column is the GSFE value, in units of mJ/m<sup>2</sup>. The USFE is the peak GSFE value.
+which would yield a new file `gsfe`. The first column is the displacement along the $\left<111\right>$ direction while the second column is the GSFE value, in units of mJ/m<sup>2</sup>. The peak value of the GSFE curve is called the unstable stacking fault energy (USFE).
 
 ### Plane 2
 

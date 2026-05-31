@@ -2,7 +2,7 @@
 #
 #SBATCH --job-name=lmp
 #SBATCH --container=el9hw
-#SBATCH --partition=ame4970_el9
+#SBATCH --partition=cm3atou_el9
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=16
 #SBATCH --output=lmp.out
