@@ -2,9 +2,9 @@
 
 ## Foreword
 
-The purpose of this project is to calculate the lattice parameter, lattice distortion, elastic constants, and generalized stacking fault energies (GSFEs) of 110 binaries.
+The purpose of this project is to calculate the lattice parameter, lattice distortion (LD), elastic constants, and generalized stacking fault energies (GSFEs) of 110 binaries.
 
-All alloys have a body-centered cubic (BCC) lattice. For each alloy, we need to run 1 LAMMPS simulations to generate the chemical short-range order (CSRO) structure, 3 LAMMPS simulation to calculate its lattice parameter, lattice distortion, and elastic constants, repsectively, and 20 LAMMPS simulations to obtain the mean GSFE curve. Therefore, in total 2,640 LAMMPS simulations are needed. The lattice parameter and GSFE curves of the random structures of these binaries were presented in [our previous paper](https://doi.org/10.1007/s11837-025-07728-x) and can be found in the file `random.xlsx` in this GitHub repository.
+All alloys have a body-centered cubic (BCC) lattice. For each alloy, we need to run 1 LAMMPS simulations to generate the chemical short-range order (CSRO) structure, 3 LAMMPS simulation to calculate its lattice parameter, LD, and elastic constants, repsectively, and 20 LAMMPS simulations to obtain the mean GSFE curve. Therefore, in total 2,640 LAMMPS simulations are needed. The lattice parameter and GSFE curves of the random structures of these binaries were presented in [our previous paper](https://doi.org/10.1007/s11837-025-07728-x) and can be found in the file `random.xlsx` in this GitHub repository.
 
 The 110 binaries include
 
@@ -93,9 +93,9 @@ where `lx`, `ly`, and `lz` can be found in the data file `data.CSRO`, i.e.,
 	ly = yhi - ylo
 	lz = zhi - zlo
 
-## Lattice distortion
+## LD
 
-kljl
+[Our previous paper](https://doi.org/10.1016/j.commatsci.2024.113587) studied the effects of CSRO on two definitions of LD, full width at half maximum (FWHM) and root mean squared atomic displacement (RMSAD), in some alloys. Here, one should follow [a previous GitHub repository](https://github.com/shuozhixu/CMS-EAM_2025) to calculate the FWHM and RMSAD of the 110 alloys.
 
 ## Elastic constants
 
@@ -134,7 +134,7 @@ Increase the integer in line 54 of `lmp_gsfe.in` from 3 to 20 to obtain 20 USFE 
 
 ## Contributors
 
-A huge thank you to the 22 contributors who ran simulations for the final project in Dr. Shuozhi Xu's [Computational Materials Science course in Spring 2026](https://shuozhixu.github.io/teaching/spring-2026/AME4970-5970-Syllabus.pdf) at the University of Oklahoma!
+A huge thank you to the 22 contributors who ran simulations to obtain the CSRO structures and to calculate the GSFE curves for the final project in Dr. Shuozhi Xu's [Computational Materials Science course in Spring 2026](https://shuozhixu.github.io/teaching/spring-2026/AME4970-5970-Syllabus.pdf) at the University of Oklahoma!
 
 Zaid Jasasra
 
