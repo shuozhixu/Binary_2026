@@ -2,14 +2,14 @@
 
 ## Foreword
 
-The purpose of this project is to calculate the lattice parameter, lattice distortion (LD), elastic constants, and generalized stacking fault energies (GSFEs) of 110 refractory random binary alloys.
+The purpose of this project is to calculate the lattice parameter, lattice distortion (LD), elastic constants, and generalized stacking fault energies (GSFEs) of 110 refractory random binary alloys in their chemical short-range order (CSRO) structures.
 
 The 110 binaries include
 
 - 11 binaries based on Mo<sub>_x_</sub>Nb<sub>1-_x_</sub>, where _x_ varies from 0.1 to 0.9 (i.e., concentrated alloys), plus where _x_ = 0.05 and _x_ = 0.95 (i.e., dilute alloys)
 - other combinations of metals, including MoTa, MoV, MoW, NbTa, NbV, NbW, TaV, TaW, and VW
 
-All alloys have a body-centered cubic (BCC) lattice. For each alloy, we need to run 1 LAMMPS simulations to generate the chemical short-range order (CSRO) structure, 3 LAMMPS simulation to calculate its lattice parameter, LD, and elastic constants, repsectively, and 20 LAMMPS simulations to obtain the mean GSFE curve. Therefore, in total 2,640 LAMMPS simulations are needed. The lattice parameter and GSFE curves of the random structures of these binaries were presented in [our previous paper](https://doi.org/10.1007/s11837-025-07728-x) and can be found in the file `random.xlsx` in this GitHub repository.
+All alloys have a body-centered cubic (BCC) lattice. For each alloy, we need to run 1 LAMMPS simulation to generate the CSRO structure, 3 LAMMPS simulations to calculate its lattice parameter, LD, and elastic constants, repsectively, and 20 LAMMPS simulations to obtain the mean GSFE curve. Therefore, in total 2,640 LAMMPS simulations are needed. The lattice parameters and GSFEs of the random structures of these binaries were presented in [our previous paper](https://doi.org/10.1007/s11837-025-07728-x) and can be found in the file `random.xlsx` in this GitHub repository.
 
 Note: Pay attention to the amount of data in our \$HOME. They can build up quickly. Once the data exceeds 20 GB, we won't be able to run anything. In addition, it may be wise to [run those high-throughput simulations automatically](https://github.com/RichardBrinlee/USFE25_high_throughput), as opposed to manually making changes to the files.
 
@@ -99,7 +99,7 @@ where `lx`, `ly`, and `lz` can be found in the data file `data.CSRO`, i.e.,
 
 For each alloy, run a LAMMPS simulation with files `in.elastic`, `displace.mod`, `init.mod`, `potential.mod`, `fitted.mtp`, `mlip.ini`, and `data.CSRO`. The first four files can be found in the `ela_const/` directory in this GitHub repository. In the batch file, designate `in.elastic` as the input file.
 
-Once the simulation is finished, we will find an output file, `*.out`, at the end of which we will find values of C11all, C12all etc. Those are the elastic constants in the [11-2]-[111]-[1-10] system (recall the `lmp_mcnpt.in` file). Hence, they should be [converted](https://github.com/shuozhixu/elastic_tensor) to those in the [100]-[010]-[001] system. Once converted, using Equations 10-12 of [this paper](https://doi.org/10.1016/j.commatsci.2021.110942) to calculate three effective BCC elastic constants.
+Once the simulation is finished, we will find an output file, `*.out`, at the end of which we will find values of C11all, C12all etc. Those are the elastic constants in the [11-2]-[111]-[1-10] system (see line 24 of the `lmp_mcnpt.in` file). Hence, they should be [converted](https://github.com/shuozhixu/elastic_tensor) to those in the [100]-[010]-[001] system. Once converted, using Equations 10-12 of [this paper](https://doi.org/10.1016/j.commatsci.2021.110942) to calculate three effective BCC elastic constants.
 
 ## GSFE
 
