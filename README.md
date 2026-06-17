@@ -2,7 +2,7 @@
 
 ## Foreword
 
-The purpose of this project is to calculate the lattice parameter, lattice distortion (LD), elastic constants, and generalized stacking fault energies (GSFEs) of 110 refractory random binary alloys in their chemical short-range order (CSRO) structures.
+The purpose of this project is to calculate the lattice parameter, lattice distortion (LD), elastic constants, generalized stacking fault energies (GSFEs), and melting points of 110 refractory random binary alloys in their chemical short-range order (CSRO) structures.
 
 The 110 binaries include
 
@@ -101,7 +101,7 @@ For each alloy, run a LAMMPS simulation with files `in.elastic`, `displace.mod`,
 
 Once the simulation is finished, we will find an output file, `*.out`, at the end of which we will find values of C11all, C12all etc. Those are the elastic constants in the [11-2]-[111]-[1-10] system (see line 24 of the `lmp_mcnpt.in` file). Hence, they should be [converted](https://github.com/shuozhixu/elastic_tensor) to those in the [100]-[010]-[001] system. Once converted, using Equations 10-12 of [this paper](https://doi.org/10.1016/j.commatsci.2021.110942) to calculate three effective BCC elastic constants.
 
-## GSFE
+## GSFEs
 
 ### Plane 1
 
@@ -129,6 +129,10 @@ Then rerun the simulation and obtain another GSFE curve and another USFE value.
 ### Other planes
 
 Increase the integer in line 54 of `lmp_gsfe.in` from 3 to 20 to obtain 20 USFE values in total. Then calculate the mean USFE value.
+
+## Melting points
+
+[Our previous paper](https://doi.org/10.1016/j.commatsci.2024.113587) studied the effects of CSRO on the melting points of many alloys. Here, one should follow [the associated GitHub repository](https://github.com/shuozhixu/CMS-EAM_2025) to calculate the melting points of the 110 alloys here. Note that the other repository assumed that the _y_ axis is the longest dimension. Since the _z_ axis is the longest dimension in the present simulation cells, the `lmp_mp.in` file should be modified accordingly.
 
 ## Contributors
 
